@@ -1,0 +1,14 @@
+Best Practices
+file terraform.tfvars best approach
+in variable.tf file default varibale should be declared
+output section for outputting values
+always cross reference using attribute names.localname to have clean code
+no repetition
+maintain different folders for different tasks -keep functionality seperate
+specify variable type in variable file to apply variable constraints- SORT OF VALIDATION
+varibale block must have desc, default, type
+LOOP SYSTEM:
+use count parameter for repeated creations
+use list and map types for better variable assignment esp for az zones etc
+$count.index for using different names eg while creating iam users recursively
+CONDITIONAL LOGIC SYSTEM
