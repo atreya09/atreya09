@@ -23,3 +23,4 @@ local values can also be used with conditional exp and var.var_names
 FUNCTIONS:
 built in fucntions only: function(arg1, arg2) 
 to try functions as example : use teraaform console cmnd 
+highly useful esp for DRY principle when used in integration with other functions
