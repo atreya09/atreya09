@@ -24,3 +24,90 @@ FUNCTIONS:
 built in fucntions only: function(arg1, arg2) 
 to try functions as example : use teraaform console cmnd 
 highly useful esp for DRY principle when used in integration with other functions
+
+DATA SOURCES :
+use this to fetch things like amiID which are frequently chnging and not good to hardcode kw:data {   filter {}}
+
+DEBUG-LOGS:
+set TF_LOG enviroemnet variable - options TRACE, DEBUG, INFO WARN ERROR
+TRACE is the most verbose and default
+eg export TF_LOG = TRACE 
+to dump in a file - export TF_LOG_PATH = /tmp/terraform-crash.log --> this means export TRACE_LOG_PATH = pathname/filetoexxport.log
+
+fmt command is for formatting
+validate command is for validation unsupported arguments, undeclared variables
+
+
+FOLDER STRUCTURE FOR LOAD ORDER:
+variables.tf
+provider.tf
+terraform.tfvars
+resource1.tf--eg ec2.tf
+resource2.tf --eg iam-users.tf
+
+REPEATABLE NESTED BLOCKS - DYANAMIC BLOCKS
+for security grps esp ingress and egress rules for multiple ports naming convention --MANY BIG SECURITYUY RULES SO CODE blocks too much - no readability
+specify a variable list of ports
+  2nd -- kw
+resource resorcename localname {
+  dynamic "atrributename eg ingress"{
+   for_each = list_var_name 
+   content {
+   from_port = ingress.value
+   to_port = ingress.value
+   protocol = 
+   
+   }
+
+  }
+}
+or can use iterator kw
+for_each listname
+iterator = port
+content {
+
+from = port.value
+} 
+
+
+TAINTING :
+to mark a resource as taint so as to destry n recreate it on next apply incase there have been a lot of manual changes not included in terraform
+terrafrom taint aws_instance.myece2
+
+SPLAT:
+use * to get all -- here * means all
+
+TERRAFORM GRAPH :
+visual rep of configuration/eexec plan
+
+terraform graph > filename.dot
+graphviz is the package used to generate diagram
+
+TERRAFORM PLAN on OUTPUT
+terraform plan -out=path eg terraform plan -out = demopath --> this saves the plan as a binary file named as demopath in the same folder as the saved.tf file was
+this is done to lock to a particular configuration only in the file. so that no unintended changes to the .tf infra is moved to the apply
+now do terraform apply path
+
+
+TERRAFORM OUTPUT CMND
+to extract value of an output variable from tf state files
+terraform output iam_names
+
+TERRAFORM CONFIGURATIONS
+terraffrom settings such as configuration usually put inside the terraform block
+required_version setting to lock to specified versions only
+specify exact required version for some cases like 0.12 needed explicity
+required_providers block for the current module
+
+
+to deal with larger infra - use smaller configurations with diff folders
+NOT GOOD PRACTICES
+with several infra components running a terraformplan will do a refresh for all theseveral resources and it iwll slow down operation
+
+CONSTRUCTION MAP
+ZIPMAP
+2 lists one for keys and other for values and creates a map out of these
+usecase: IAM users along wiht coressponding IAM arns needed in output
+-refresh = false use this
+-target = resource to only focus on 1 target
+
