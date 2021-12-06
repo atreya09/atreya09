@@ -111,3 +111,8 @@ usecase: IAM users along wiht coressponding IAM arns needed in output
 -refresh = false use this
 -target = resource to only focus on 1 target
 
+PROVISIONERS:
+to install software on created webservers- configuration part of terrafrom
+local exec and remote exec are 2 type
+connector block to allow terraform to connect to ec2 instances
+this is inside provisioner block .. kw provisioner {inline{commands}}
