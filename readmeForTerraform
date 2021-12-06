@@ -131,7 +131,8 @@ kw: when = destroy
 CREATION TIME PROVISIONER:
 are run only when the resource is created
 and when resource  creation fails : resource is marked as tainted
+
 FAILURE SETTINGS:
 kw: continue --> ignore apply time error and continue with the commnad of remote exec
 and fail --> default , if failed tainted resource , to be destroyed with destroy comnd
-
+on_failure = continue
