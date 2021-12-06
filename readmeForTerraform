@@ -112,7 +112,26 @@ usecase: IAM users along wiht coressponding IAM arns needed in output
 -target = resource to only focus on 1 target
 
 PROVISIONERS:
-to install software on created webservers- configuration part of terrafrom
+to install software on created webservers- configuration part of terrafrom; run code inside the server
 local exec and remote exec are 2 type
+REMOTE EXEC PROVISIONER:
 connector block to allow terraform to connect to ec2 instances
 this is inside provisioner block .. kw provisioner {inline{commands}}
+coonection{type, user, private-key,host}
+
+
+LOCAl EXEEC PROVISIONER:
+to run code inside the directory where terraform is invoked
+run ansible playbooks on the server after creation resource
+kw provisioner "local-exec"{coomand =}
+
+DESTROY TIME PROVISIONER:
+runs when the resource within it is destroyed
+kw: when = destroy
+CREATION TIME PROVISIONER:
+are run only when the resource is created
+and when resource  creation fails : resource is marked as tainted
+FAILURE SETTINGS:
+kw: continue --> ignore apply time error and continue with the commnad of remote exec
+and fail --> default , if failed tainted resource , to be destroyed with destroy comnd
+
