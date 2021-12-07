@@ -169,3 +169,13 @@ custom workspace created has the tfstate in subdirectory created inside ur direc
 SECURITY ASPECTS
 never ever commit ur access keys to git 
 even adding a file path to password attribute is bad cos this creates a tf state file where the password is still stored.
+Source argument is used to tell the path where tofind  the source code foor the desired child module
+ref aregument after ? in the git clone url tells the branch where to fetch the source code from
+./or ../ indicates local path
+files to add in gitignore file
+.tfstate : contains sensitive data often
+terrafrom.tfvars : same reason
+.terraform: is large in size and recreated with terraform init cmnd
+crash.log: to store logs when terraform crashes
+to store .tfstate files use remote backend feature : eg s3 configured as remote bckend : using bacend.tf file with backend kw code block
+STD (STATE storage & locking)and ENHANCED( state + remote) BACKENDS are 2 TYPES
