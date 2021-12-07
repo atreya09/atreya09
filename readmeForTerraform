@@ -166,3 +166,5 @@ default is the name of current workspace unless u create new using the subcomman
 tfstate of default workspace in root directory
 custom workspace created has the tfstate in subdirectory created inside ur directory by name of worksoace like dev, prod
 
+SECURITY ASPECTS
+never ever commit ur access keys to git 
