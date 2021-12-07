@@ -168,3 +168,4 @@ custom workspace created has the tfstate in subdirectory created inside ur direc
 
 SECURITY ASPECTS
 never ever commit ur access keys to git 
+even adding a file path to password attribute is bad cos this creates a tf state file where the password is still stored.
