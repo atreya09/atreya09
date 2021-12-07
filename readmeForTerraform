@@ -136,3 +136,33 @@ FAILURE SETTINGS:
 kw: continue --> ignore apply time error and continue with the commnad of remote exec
 and fail --> default , if failed tainted resource , to be destroyed with destroy comnd
 on_failure = continue
+
+
+MODULES: for DRY prinicple
+use a separate module folder and a project folder under ur directory
+in modules folder create that tf files(configuration) which are repeatable or reusable
+for eg EC2 instances creation resource block code
+this file is then called in kw:module block in project (folder)  files 
+the path is mentioned while calling ( this causes the developer to jsut call alreDY written code for resource creation)
+terraform init command to run inorider to initialize the module before plan
+
+HARDCODING CHANGEABLE ATTRIS INTO MODULES NOT GOOD:
+for attributes like instance_type which is changeable for every stage (QA, dev, prod) do not hardocde in module
+use variable to define it in module with a default value
+override the default variable value with explicitly defining it in ur project tf file
+
+USE HARDOCDING TO AVOID UNINTNETIONAL CHANGES:
+use hardcoding to avoid any person changing any value that is not required to change
+
+TERRAFORM REGISTRY :
+only verified modules to be used
+use the code , copy and modify it in ur file named as registry-terraform.tf
+terraform init will download the module with associated files as package in ur cli
+
+TERRAFORM WORKSPACE:
+for different workspaces like we have in windows or linux for different purposes
+cmnd is terraform workspace - u can do terraform plan in a specific workspace after moving to specific workspace 
+default is the name of current workspace unless u create new using the subcommand new
+tfstate of default workspace in root directory
+custom workspace created has the tfstate in subdirectory created inside ur directory by name of worksoace like dev, prod
+
