@@ -185,3 +185,7 @@ put the backend block with acccess keys and secret keys to connect with aws
 and then run terraform init
 this way the backend gets initiailized 
 check that the tfstate file gets stored in ur remote backend(ie s3)
+
+terraform plan locks the tfstate file to prevent simultaneous conflicts to tfstate file during write operation
+remote backedn needs to supprt locking functionality inorder to avoid state file being corrupt due to simultaneous terraform plan
+state locking with s3 is implemented with dyanodb-create table and add dyanidb table name as attribute in backend block
