@@ -189,3 +189,30 @@ check that the tfstate file gets stored in ur remote backend(ie s3)
 terraform plan locks the tfstate file to prevent simultaneous conflicts to tfstate file during write operation
 remote backedn needs to supprt locking functionality inorder to avoid state file being corrupt due to simultaneous terraform plan
 state locking with s3 is implemented with dyanodb-create table and add dyanidb table name as attribute in backend block
+to modify state file use commands
+list, mv, pull etc
+lsit : list resource which are part of state file
+move : to move items in state file, rename an existing resource without destroying or recreating it| best practice to rename a resource -- donot rename from .tf file , 
+-> for above use mv cmnd terraform state mv |options| SOURCE(OLDNAME) DESTINATION(NEW NAME)
+TERRAFORM PULL COMMAND : manually download and output the state from the remote state
+push cmnd : to manually upload local state file to remote state: dont use this cmnd often
+rm : remove items from state ; items not physically destroyed but no longer managed by terraform henceforth
+show resourcename: to show attributes of a single provided resource
+
+TERRAFORM IMPORT:
+use this when manual changes done in console are to imported to aws so that henceforth the modifications to this resoirce can also be managed by IAc using terraform 
+first create a tf file seeing the atrributes values form the console --> this is pre created manual infra currently not managed as IAC in teraform
+eh terraform import resourcename.ec2 instance id from console -- > this command imports the state file and links it to the manualyy pre created ec2 instance without recreating it
+
+SECURITY CONSIDERATIIONS:
+dont use cred in providers.tf
+for single provider and multiple configurations like region specific creation of resource use alias parameter - provider aws { alias: mumbai, region:us-east-1}
+and in resource block - use the provider attribute - provider = aws/aliasname --> aws.mumbai
+single provider ,multiple reosurces in  multiple accounts (that is multiple access keys) : use --profile parameter
+specify profile = "profilenamefrom aws credential file or from aws for which access key belongs" in the reosurce block
+use assume role block inside providers block -- specify role-arn and session-name
+while working on a field containig senssitive parameter ; it is important to set the sensitive parameter as true in the schema
+it will not encrypt the value in the state file 
+prevent the fields value from showing up in the cli output
+
+
