@@ -179,3 +179,9 @@ terrafrom.tfvars : same reason
 crash.log: to store logs when terraform crashes
 to store .tfstate files use remote backend feature : eg s3 configured as remote bckend : using bacend.tf file with backend kw code block
 STD (STATE storage & locking)and ENHANCED( state + remote) BACKENDS are 2 TYPES
+
+To inform terrafrom abt which backend to use. make a backend.tf file .. inside it 
+put the backend block with acccess keys and secret keys to connect with aws 
+and then run terraform init
+this way the backend gets initiailized 
+check that the tfstate file gets stored in ur remote backend(ie s3)
