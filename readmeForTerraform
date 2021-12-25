@@ -1,6 +1,22 @@
 Best Practices
 file terraform.tfvars best approach
-in variable.tf file default varibale should be declared
+in variable.tf file  varibale definition is present 
+variable.tf or any variables in any.tf files takes highest precendece, so declare variable in .tfvars and define in .tfvars.
+ as child module .tfvar files are treated as optional and root tfvars required and authoritative
+Any overriding of the defaults that are set in your *.tfvar file, should be in a variables.tf file in the relevant directory of the module requiring the new variable, 
+One thing to note though is that unless you use a separate directory structure and separate state files to handle each environment, you will overwrite any existing environment.
+Terraform loads variables in the following order, with later sources taking precedence over earlier ones:
+  @Environment variables
+  @The tfvarsfile, if present.
+  @The tfvars.jsonfile, if present.
+  @Any *.auto.tfvars or *.auto.tfvars.json files, processed in lexical order of their filenames.
+  @Any -var and -var-file options on the command line, in order they are provided. (This includes variables set by a Terraform Cloud workspace.)
+
+
+
+
+
+
 output section for outputting values
 always cross reference using resource_type_name.localname to have clean code
 no repetition
