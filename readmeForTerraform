@@ -12,7 +12,9 @@ Terraform loads variables in the following order, with later sources taking prec
   @Any *.auto.tfvars or *.auto.tfvars.json files, processed in lexical order of their filenames.
   @Any -var and -var-file options on the command line, in order they are provided. (This includes variables set by a Terraform Cloud workspace.)
 
-
+The tfvars file extension is in the root folder of an environment to define values to variables, and the .tf uses modules to declare them,
+however what complicates matters is that people have used tfvars files in modules and tf files in the root module.
+So we use a *.tfvar file to load in defaults as they are automatically loaded without any additional command line option.
 
 
 
